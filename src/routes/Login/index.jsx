@@ -47,21 +47,56 @@ export default function Login() {
         }
     };
 
+    const handleVoltar = () => {
+        Redirecionamento(navigate, '/')
+    } 
+    const handleCadastrar = () => {
+        Redirecionamento(navigate, '/cadastro')
+    } 
+
     return (
+
         <div className='fundo'>
             <div className='container'>
-                <h1>Login</h1>
-                <p>Seja bem vindo novamente!</p>
-                <span id='containerInput'>
-                    <label id='email'>Email:</label>
-                    <input className='inputLogin' value={email} onChange={(e) => setEmail(e.target.value)} />
-                </span>
-                <span id='containerInput'>
-                    <label id='senha'>Senha:</label>
-                    <input className='inputLogin' value={senha} onChange={(e) => setSenha(e.target.value)} />
-                </span>
-                <button onClick={logar}>Login</button>
+                <div className='header'>
+                    <div className='button'>
+                        <button className='buttonVoltar' onClick={handleVoltar}>Voltar</button>
+                    </div>
+                    <div className='titulo'>
+                        CodeUp
+                    </div>
+                </div>
+                <div className='section'>
+
+                    <div className='lado_branco'>
+                        <h1>Entrar</h1>
+
+                        <div id='containerInput'>
+                            <label id='email'>Email:</label>
+                            <input className='inputCadastro' value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </div>
+                        <div id='containerInput'>
+                            <label id='senha'>Senha:</label>
+                            <input className='inputCadastro' value={senha} onChange={(e) => setSenha(e.target.value)} />
+                        </div>
+
+                        <button className='buttonForm' onClick={logar}>Login</button>
+                    </div>
+                    <div className='lado_cinza'>
+                        <p className='txtForm'>Não tem conta ainda?</p>
+                        <button className='buttonForm' onClick={handleCadastrar}>
+                            Cadastre-se
+                        </button>
+                    </div>
+
+
+
+                </div>
             </div>
         </div>
+
+
+
+
     );
 }

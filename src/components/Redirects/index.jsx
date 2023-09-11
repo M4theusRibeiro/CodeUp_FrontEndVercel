@@ -4,17 +4,22 @@ export default function Redirecionamento(navigate, value) {
         case '/login':
             setTimeout(() => {
                 navigate('/login');
-            }, 1000);
+            }, 100);
             break;
         case '/cadastro':
             setTimeout(() => {
                 navigate('/cadastro');
-            }, 1000);
+            }, 100);
             break;
         case '/terminal':
             setTimeout(() => {
                 navigate('/terminal');
-            }, 1000);
+            }, 100);
+            break;
+        case '/':
+            setTimeout(() => {
+                navigate('/');
+            }, 100);
             break;
         default:
             break;

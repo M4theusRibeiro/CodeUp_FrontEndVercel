@@ -1,4 +1,4 @@
-import './styles.css';
+import './styles.css'
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -60,31 +60,56 @@ export default function Cadastro() {
             });
     };
 
+    const handleVoltar = () => {
+        Redirecionamento(navigate, '/')
+    }
+    const handleLogin = () => {
+        Redirecionamento(navigate, '/login')
+    } 
     return (
         <div className='fundo'>
-     
             <div className='container'>
-                <h1>Cadastro</h1>
-                <p>Cadastre-se agora na CodeUP e adentre no mundo da programação com o pé direito!</p>
-                <span id='containerInput'>
+                <div className='header'>
+                    <div className='button'>
+                    <button className='buttonVoltar' onClick={handleVoltar}>Voltar</button>
+                    </div>
+                    <div className='titulo'>
+                        CodeUp
+                    </div>
+                </div>
+               <div className='section'>
+
+                <div className='lado_cinza'>
+                     <p className='txtForm'>Já tem conta?</p>
+                    <button className='buttonForm' onClick={handleLogin}>
+                        Entrar
+                    </button>
+                </div>
+
+        <div className='lado_branco'>
+            <h1>Cadastre-se</h1>
+            <div id='containerInput'>
                     <label id='nome'>Nome:</label>
                     <input className='inputCadastro' value={nome} onChange={(e) => setNome(e.target.value)} />
-                </span>
-                <span id='containerInput'>
+                </div>
+                <div id='containerInput'>
                     <label id='email'>Email:</label>
                     <input className='inputCadastro' value={email} onChange={(e) => setEmail(e.target.value)} />
-                </span>
-                <span id='containerInput'>
+                </div>
+                <div id='containerInput'>
                     <label id='senha'>Senha:</label>
                     <input className='inputCadastro' value={senha} onChange={(e) => setSenha(e.target.value)} />
-                </span>
-                <span id='containerInput'>
+                </div>
+                <div id='containerInput'>
                     <label id='idade'>Idade:</label>
                     <input className='inputCadastro' value={idade} onChange={(e) => setIdade(e.target.value)} />
-                </span>
-                <button onClick={cadastrar}>Cadastro</button>
+                </div>
+                <button className='buttonForm' onClick={cadastrar}>Cadastre-se</button>
+        </div>
+               
+              
             </div>
-
+            </div>
         </div>
     );
 }
