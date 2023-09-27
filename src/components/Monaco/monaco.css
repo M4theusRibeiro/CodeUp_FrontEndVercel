@@ -1,0 +1,23 @@
+.monacoContainer{
+display: flex;
+}
+.monaco{
+    width: 50vw;
+    height: 100vh;
+}
+.console{
+    width: 50vw;
+    height: 100vh;
+    background-color: #111111;
+    color: #FFF;
+}
+
+.botao{
+    width: 120px;
+    height: 40px;
+    border: 1px solid #FFF;
+    background-color: #000000;
+    cursor: pointer;
+    color: #FFF;
+    font-size: 16px;
+}
