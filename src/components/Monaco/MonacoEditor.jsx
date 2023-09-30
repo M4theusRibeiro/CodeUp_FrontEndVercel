@@ -1,47 +1,80 @@
 import Monaco, { useMonaco } from '@monaco-editor/react';
 import { useState, useRef, useEffect } from 'react';
+import api from '../../api'
 
 import Amy from './themes/Amy.json';
 import MonokaiBrightTheme from './themes/Monokai Bright.json';
 import Monokai from './themes/Monokai.json';
 
 import './monaco.css';
-import axios from 'axios';
 
 function MonacoEditor() {
   const [data, setData] = useState([]);
   const monaco = useMonaco();
-  const [conteudoMonaco, setConteudoMonaco] = useState();
+  const [conteudoMonaco, setConteudoMonaco] = useState('function{\n}');
   const [theme, setTheme] = useState('vs-dark'); // Initialize with vs-dark theme
   const [errorMessages, setErrorMessages] = useState([]);
   const [consoleMessages, setConsoleMessages] = useState([]);
 
-  useEffect(() => {
-    // A URL da API que você deseja acessar
-    const apiUrl = 'http://localhost:8080/fases/1';
+  function login() {
 
-
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${sessionStorage.BearerToken}` // Adiciona o cabeçalho de autorização com o token
-      }
+    const corpoRequisicao = {
+      // Aqui você pode definir os dados que deseja enviar no corpo da requisição
+      // Exemplo: username e password
+      email: 'john@doe.com',
+      senha: '123456'
     };
 
-    // Faz a solicitação GET usando Axios
-    axios.get(apiUrl, config)
-      .then((response) => {
-        setData(response.data); // Define os dados recebidos no estado
-        setConteudoMonaco(data.conteudo_exec)
-      })
-      .catch((error) => {
-        console.error('Erro na solicitação:', error);
-      });
-    }, []);
-    console.log(data.conteudo_exec);
-    
-    
-    
+    const config = {
+      method: 'POST',
+      url: '/usuarios/login',
+      headers: {
+        'Content-Type': 'application/json' // Define o tipo de conteúdo como JSON
+      },
+      data: JSON.stringify(corpoRequisicao) // Converte o corpo para JSON e o inclui na requisição
+    };
 
+    api.post('/usuarios/login', corpoRequisicao, config)
+    .then((respostaObtida) => {
+        // Lida com a resposta da API aqui
+        console.log("Logou com sucesso");
+        console.log(respostaObtida);
+        sessionStorage.setItem('tokenBearer', respostaObtida.data.token);
+          })
+    .catch((erroOcorrido) => {
+      // Lida com erros aqui
+    });
+    
+    }
+
+    function buscarFase() {
+
+      const config = {
+        method: 'GET',
+        url: '/fases/1',
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.tokenBearer}` // Aqui, adicionamos o token Bearer ao cabeçalho Authorization
+        }
+      };
+  
+      api(config)
+      .then((respostaObtida) => {
+      // cairá aqui se a requisição for realizada;
+      console.log(respostaObtida);
+      // objeto que representa a resposta enviada pela API;
+      console.log(respostaObtida.status);
+      // vendo status da resposta (OK - 200);
+      console.log(respostaObtida.data);
+      // vendo os dados da resposta (data: []);
+
+      setConteudoMonaco('{respostaObtida.data.conteudo_exec')
+      setData(respostaObtida.data)
+      // setando "musicas" com os mesmos dados recebidos pela resposta da requisição;
+      })
+      .catch((erroOcorrido) => { // cairá aqui se houver algum erro durante a requisição
+      console.log(erroOcorrido);
+      })
+      }
 
   const editorRef = useRef(null);
 
@@ -138,7 +171,10 @@ function MonacoEditor() {
       </select>
       
       <button className='botao' onClick={validar}>Verificar</button>
-        <button className='botao' onClick={handleSave}>Salvar</button>
+      <button className='botao' onClick={handleSave}>Salvar</button>
+      <button className='botao' onClick={login}>Login</button>
+      <button className='botao' onClick={buscarFase}>Buscar fase</button>
+
       <span className='monacoContainer'>
 
         <div className='monaco'>
