@@ -1,3 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&family=Poppins:wght@400;600;700&family=Spectral:wght@700&display=swap');
+
 *{
-  background-color: black ;
+  box-sizing: border-box;
+  background-color: black;
 }
+
+body{
+  margin: 0px;
+  color: #333;
+  --type-first: 'Poppins', sans-serif;
+  --type-second: 'Poppins', sans-serif;
+  font-family: var(--type-first);
+}
+
+h1, h2, h3, h4, p{
+  margin: 0px;
+}
+
+ul, li{
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button, input{
+  display: block;
+  font-size: 1rem;
+  font-family: var(--type-first);
+  color: #333;
+}
+
+.container{
+  max-width: 72.5rem;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+a{
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.title{
+  font-family: var(--type-second);
+  line-height: 1;
+  font-size: 3rem;
+  margin: 1rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+
+
+/* .animeLeft{
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: animeLeft .3s forwards;
+}
+
+@keyframes animeLeft {
+  to {
+    opacity: 1;
+    transform: initial;
+  }
+} */
