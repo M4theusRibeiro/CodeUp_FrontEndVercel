@@ -21,8 +21,8 @@ function MonacoEditor() {
     const corpoRequisicao = {
       // Aqui você pode definir os dados que deseja enviar no corpo da requisição
       // Exemplo: username e password
-      email: 'john@doe.com',
-      senha: '123456'
+      email: 'dev@sptech.school',
+      senha: '12345678'
     };
 
     const config = {
@@ -51,7 +51,7 @@ function MonacoEditor() {
 
       const config = {
         method: 'GET',
-        url: '/fases/1',
+        url: `/fases/${sessionStorage.faseSelecionada}`,
         headers: {
           'Authorization': `Bearer ${sessionStorage.tokenBearer}` // Aqui, adicionamos o token Bearer ao cabeçalho Authorization
         }
@@ -67,7 +67,7 @@ function MonacoEditor() {
       console.log(respostaObtida.data);
       // vendo os dados da resposta (data: []);
 
-      setConteudoMonaco('{respostaObtida.data.conteudo_exec')
+      setConteudoMonaco(respostaObtida.data.conteudo_exec)
       setData(respostaObtida.data)
       // setando "musicas" com os mesmos dados recebidos pela resposta da requisição;
       })
@@ -157,9 +157,14 @@ function MonacoEditor() {
   const criarCookies = () =>{
     setcookie("user", "John", time() + 3600, "/");
   }
+  
+  const selecionarFase = (event) =>{
+    var faseSelecionada = event.target.value;
+    sessionStorage.setItem("faseSelecionada", faseSelecionada)
+  }
+
 
   return (
-    
     <div>
       <select id='selectTemas' onChange={handleThemeChange} >
         <option value='0'>Visual Studio</option>
@@ -168,6 +173,12 @@ function MonacoEditor() {
         <option value='3'>Amy</option>
         <option value='4'>MonokaiBrightTheme</option>
         <option value='5'>Monokai</option>
+      </select>
+      <select id='selectFase' onChange={selecionarFase} >
+        <option value='1'>Soma</option>
+        <option value='2'>Subtração</option>
+        <option value='3'>Multiplicação</option>
+        <option value='4'>Divisão</option>
       </select>
       
       <button className='botao' onClick={validar}>Verificar</button>
