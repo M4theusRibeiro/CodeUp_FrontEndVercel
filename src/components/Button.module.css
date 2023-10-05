@@ -1,0 +1,15 @@
+.button {
+    background: linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0)) padding-box, linear-gradient(90deg, rgba(0, 226, 242, 1) 0%, rgba(0, 127, 251, 1) 100%) border-box;
+    border: 1px solid transparent;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 143px;
+    margin: 0 auto;
+}
+
+.button p{
+    background: -webkit-linear-gradient(360deg, rgba(0, 226, 242, 1) 0%, rgba(0, 127, 251, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

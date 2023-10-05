@@ -2,7 +2,6 @@
 
 *{
   box-sizing: border-box;
-  background-color: black;
 }
 
 body{
@@ -11,6 +10,7 @@ body{
   --type-first: 'Poppins', sans-serif;
   --type-second: 'Poppins', sans-serif;
   font-family: var(--type-first);
+  background-color: black;
 }
 
 h1, h2, h3, h4, p{
