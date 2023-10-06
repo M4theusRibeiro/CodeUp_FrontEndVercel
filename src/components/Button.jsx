@@ -1,9 +1,14 @@
 import React from 'react'
 import style from './Button.module.css'
 
-const Button = ({texto}) => {
+const Button = ({texto, value, setValue}) => {
   return (
-    <button className={style.button}>
+    <button 
+    className={style.button}
+    onClick={() => {
+      setValue(!value)
+    }}
+    >
       <p>{texto}</p>
     </button>
   )

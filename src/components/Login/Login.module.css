@@ -71,3 +71,8 @@
 .p{
     margin-bottom: 12px;
 }
+
+.date{
+    min-width: 202px;
+    font-size: 0.8rem;
+}
