@@ -1,0 +1,35 @@
+.bg{
+    background-color: #171717;
+}
+
+.grid{
+    display: grid;
+    grid-template-areas: 
+    "estudo estudo em-breve"
+    "em-breve2 em-breve3 em-breve";
+    gap: 16px;
+    min-height: calc(100vh - 37px );
+    color: white;
+}
+
+.estudo{
+    text-align: center;
+    background-color: black;
+    grid-area: estudo;
+    margin-top: 80px;
+}
+
+.emBreve{
+    grid-area: em-breve;
+    background-color: black;
+}
+
+.emBreve2{
+    grid-area: em-breve2;
+    background-color: black;
+}
+
+.emBreve3{
+    grid-area: em-breve3;
+    background-color: black;
+}

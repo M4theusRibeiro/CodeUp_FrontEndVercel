@@ -1,10 +1,12 @@
 import React from "react";
-import { HeaderPrincipal } from "./HeaderPrincipal";
+import { HeaderHome } from "./HeaderHome";
+
+
 
 const Home = () => {
   return (
     <>
-      <HeaderPrincipal />
+    <HeaderHome />
     </>
   );
 };
