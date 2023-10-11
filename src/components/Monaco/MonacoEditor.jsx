@@ -16,36 +16,7 @@ function MonacoEditor() {
   const [errorMessages, setErrorMessages] = useState([]);
   const [consoleMessages, setConsoleMessages] = useState([]);
 
-  function login() {
-
-    const corpoRequisicao = {
-      // Aqui você pode definir os dados que deseja enviar no corpo da requisição
-      // Exemplo: username e password
-      email: 'dev@sptech.school',
-      senha: '12345678'
-    };
-
-    const config = {
-      method: 'POST',
-      url: '/usuarios/login',
-      headers: {
-        'Content-Type': 'application/json' // Define o tipo de conteúdo como JSON
-      },
-      data: JSON.stringify(corpoRequisicao) // Converte o corpo para JSON e o inclui na requisição
-    };
-
-    api.post('/usuarios/login', corpoRequisicao, config)
-    .then((respostaObtida) => {
-        // Lida com a resposta da API aqui
-        console.log("Logou com sucesso");
-        console.log(respostaObtida);
-        sessionStorage.setItem('tokenBearer', respostaObtida.data.token);
-          })
-    .catch((erroOcorrido) => {
-      // Lida com erros aqui
-    });
-    
-    }
+  
 
     function buscarFase() {
 
@@ -154,9 +125,7 @@ function MonacoEditor() {
 
   };
 
-  const criarCookies = () =>{
-    setcookie("user", "John", time() + 3600, "/");
-  }
+ 
   
   const selecionarFase = (event) =>{
     var faseSelecionada = event.target.value;

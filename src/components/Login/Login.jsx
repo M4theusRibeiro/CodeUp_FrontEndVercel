@@ -17,6 +17,55 @@ const Login = () => {
   const [nome, setNome] = React.useState("");
   const [dataNasc, setDataNasc] = React.useState("");
 
+
+  function login() {
+
+    const corpoRequisicao = {
+      email,
+      senha,
+    };
+
+    api.post('/usuarios/login', corpoRequisicao, {
+      headers: {
+        'Content-Type': 'application/json', // Define o tipo de conteúdo como JSON
+      },
+    })
+    .then((resposta) => {
+        // Lida com a resposta da API aqui
+        console.log("Logou com sucesso");
+        console.log(resposta);
+        sessionStorage.setItem('tokenBearer', resposta.data.token);
+          })
+    .catch((erro) => {
+      console.log("Usuário ou senha inválidos");
+    });
+  }
+
+  function cadastrar() {
+
+    const corpoRequisicao = {
+      email,
+      senha,
+      nome,
+      dataNasc,
+    };
+
+    api.post('/usuarios/cadastrar', corpoRequisicao, {
+      headers: {
+        'Content-Type': 'application/json', // Define o tipo de conteúdo como JSON
+      },
+    })
+    .then((resposta) => {
+        // Lida com a resposta da API aqui
+        console.log("Cadastro realizado com sucesso!");
+        console.log(resposta);
+        sessionStorage.setItem('tokenBearer', resposta.data.token);
+          })
+    .catch((erro) => {
+      console.log("Usuário ou senha inválidos");
+    });
+  }
+
   return (
     <>
       <nav className={styles.container + " " + styles.nav}>
@@ -49,7 +98,7 @@ const Login = () => {
                 value={senha}
                 setValue={setSenha}
               />
-              <Button texto="Entrar" className={styles.button} />
+              <Button texto="Entrar" className={styles.button} onClick={login}/>
             </div>
           </div>
         )}
@@ -115,7 +164,7 @@ const Login = () => {
                 value={senha}
                 setValue={setSenha}
               />
-              <Button texto="Cadastre-se" className={styles.button} />
+              <Button texto="Cadastre-se" className={styles.button} onClick={cadastrar} />
             </div>
           </div>
         )}
