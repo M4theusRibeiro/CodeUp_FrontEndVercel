@@ -18,7 +18,7 @@ const Login = () => {
   const [dataNasc, setDataNasc] = React.useState("");
 
   function mudarDiv(){
-    setLoginCadastro(!value)
+    setLoginCadastro(!loginCadastro)
   }
 
 
