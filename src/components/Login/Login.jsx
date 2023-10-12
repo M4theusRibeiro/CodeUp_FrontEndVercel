@@ -17,6 +17,10 @@ const Login = () => {
   const [nome, setNome] = React.useState("");
   const [dataNasc, setDataNasc] = React.useState("");
 
+  function mudarDiv(){
+    setLoginCadastro(!value)
+  }
+
 
   function login() {
 
@@ -98,7 +102,7 @@ const Login = () => {
                 value={senha}
                 setValue={setSenha}
               />
-              <Button texto="Entrar" className={styles.button} onClick={login}/>
+              <Button texto="Entrar" className={styles.button} setValue={login}/>
             </div>
           </div>
         )}
@@ -111,7 +115,7 @@ const Login = () => {
               className={styles.button}
               texto="Cadastre-se"
               value={loginCadastro}
-              setValue={setLoginCadastro}
+              setValue={mudarDiv}
             />
           </> : <>
             <p className={styles.p}>Já tem conta?</p>
@@ -119,7 +123,7 @@ const Login = () => {
               className={styles.button}
               texto="Entrar"
               value={loginCadastro}
-              setValue={setLoginCadastro}
+              setValue={mudarDiv}
             />
           </>}
 
@@ -164,7 +168,7 @@ const Login = () => {
                 value={senha}
                 setValue={setSenha}
               />
-              <Button texto="Cadastre-se" className={styles.button} onClick={cadastrar} />
+              <Button texto="Cadastre-se" className={styles.button} setValue={cadastrar} />
             </div>
           </div>
         )}

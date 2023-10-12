@@ -6,7 +6,7 @@ const Button = ({texto, value, setValue}) => {
     <button 
     className={style.button}
     onClick={() => {
-      setValue(!value)
+      setValue()
     }}
     >
       <p>{texto}</p>
