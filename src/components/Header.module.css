@@ -1,0 +1,17 @@
+.bg{
+    background-color: rgb(0, 0, 0);
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 5px;
+}
+
+.nav{
+    display: flex;
+    gap: 40px;
+    font-weight: 600;
+}

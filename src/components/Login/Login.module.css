@@ -1,0 +1,78 @@
+.container{
+    max-width: 47.5rem;
+    padding: 0 1rem;
+    margin: 0 auto;
+}
+
+.nav{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.link{
+    align-self: flex-start;
+}
+
+.link::before{
+    content: "< ";
+}
+
+.containerLogin{
+    display: flex;
+    background-color: #101010;
+    height: 80vh;
+    padding: 0px;
+}
+
+.preCadastro{
+    width: 50%;
+    background-color: #151515;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.preCadastro p{
+    color: white;
+    font-weight: 600;
+    
+}
+
+.titulo{
+    color: white;
+    margin-bottom: 23px;
+}
+
+.input {
+    margin-bottom: 12px;
+}
+
+.input2 {
+    margin-bottom: 23px;
+}
+
+.input:nth-child(1){
+    margin-bottom: 27px;
+    background-color: aliceblue;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.p{
+    margin-bottom: 12px;
+}
+
+.date{
+    min-width: 240px;
+    font-size: 0.8rem;
+}
