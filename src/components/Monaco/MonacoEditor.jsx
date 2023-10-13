@@ -1,6 +1,6 @@
 import Monaco, { useMonaco } from '@monaco-editor/react';
 import { useState, useRef, useEffect } from 'react';
-import "monaco-themes/themes/Monokai Bright.json";
+import api from '../../api'
 
 import Amy from './themes/Amy.json';
 import MonokaiBrightTheme from './themes/Monokai Bright.json';
@@ -9,22 +9,49 @@ import Monokai from './themes/Monokai.json';
 import './monaco.css';
 
 function MonacoEditor() {
+  const [data, setData] = useState([]);
   const monaco = useMonaco();
-  const [conteudoMonaco, setConteudoMonaco] = useState(`//Sua misão é somar dois números\nfunction exercicio(n1, n2){\nreturn null;\n}`);
+  const [conteudoMonaco, setConteudoMonaco] = useState('function{\n}');
   const [theme, setTheme] = useState('vs-dark'); // Initialize with vs-dark theme
   const [errorMessages, setErrorMessages] = useState([]);
   const [consoleMessages, setConsoleMessages] = useState([]);
 
+  
+
+    function buscarFase() {
+
+      const config = {
+        method: 'GET',
+        url: `/fases/${sessionStorage.faseSelecionada}`,
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.tokenBearer}` // Aqui, adicionamos o token Bearer ao cabeçalho Authorization
+        }
+      };
+  
+      api(config)
+      .then((respostaObtida) => {
+      // cairá aqui se a requisição for realizada;
+      console.log(respostaObtida);
+      // objeto que representa a resposta enviada pela API;
+      console.log(respostaObtida.status);
+      // vendo status da resposta (OK - 200);
+      console.log(respostaObtida.data);
+      // vendo os dados da resposta (data: []);
+
+      setConteudoMonaco(respostaObtida.data.conteudo_exec)
+      setData(respostaObtida.data)
+      // setando "musicas" com os mesmos dados recebidos pela resposta da requisição;
+      })
+      .catch((erroOcorrido) => { // cairá aqui se houver algum erro durante a requisição
+      console.log(erroOcorrido);
+      })
+      }
 
   const editorRef = useRef(null);
 
   const handleSave = () => {
     //Salvar no banco assim
     console.log(editorRef.current.getValue())
-  }
-
-  const handleEditorOldMout = (editor, monaco) => {
-    editorRef.current = editor;
   }
 
   function handleEditorValidation(markers) {
@@ -63,7 +90,7 @@ function MonacoEditor() {
       const resultado = eval(exec);
 
       // Valida se acertou o teste
-      if(resultado == listaNumeros[i] + listaNumeros[i+1]){
+      if(resultado === listaNumeros[i] + listaNumeros[i+1]){
         acertosTotais++;
         console.log("Acertou")
       }
@@ -71,7 +98,7 @@ function MonacoEditor() {
     
     
     var msg = `O seu código não está correto! Acertou um total de ${acertosTotais} dos testes`
-    if(acertosNecessarios == acertosTotais){
+    if(acertosNecessarios === acertosTotais){
       msg = `O seu código está correto! Acertou um total de ${acertosTotais} dos testes`
     }
     setConsoleMessages(msg)
@@ -82,13 +109,13 @@ function MonacoEditor() {
 
   const listaTemas = ['vs', 'vs-dark', 'hc-black', Amy, MonokaiBrightTheme, Monokai]
   const handleThemeChange = (event) => {
-    if (event.target.value == 0) {
+    if (event.target.value === 0) {
       monaco.editor.setTheme('vs');
 
-    } else if (event.target.value == 1) {
+    } else if (event.target.value === 1) {
       monaco.editor.setTheme('vs-dark');
 
-    } else if (event.target.value == 2) {
+    } else if (event.target.value === 2) {
       monaco.editor.setTheme('hc-black');
 
     } else {
@@ -97,6 +124,14 @@ function MonacoEditor() {
     }
 
   };
+
+ 
+  
+  const selecionarFase = (event) =>{
+    var faseSelecionada = event.target.value;
+    sessionStorage.setItem("faseSelecionada", faseSelecionada)
+  }
+
 
   return (
     <div>
@@ -108,9 +143,18 @@ function MonacoEditor() {
         <option value='4'>MonokaiBrightTheme</option>
         <option value='5'>Monokai</option>
       </select>
+      <select id='selectFase' onChange={selecionarFase} >
+        <option value='1'>Soma</option>
+        <option value='2'>Subtração</option>
+        <option value='3'>Multiplicação</option>
+        <option value='4'>Divisão</option>
+      </select>
       
       <button className='botao' onClick={validar}>Verificar</button>
-        <button className='botao' onClick={handleSave}>Salvar</button>
+      <button className='botao' onClick={handleSave}>Salvar</button>
+      <button className='botao' onClick={login}>Login</button>
+      <button className='botao' onClick={buscarFase}>Buscar fase</button>
+
       <span className='monacoContainer'>
 
         <div className='monaco'>
@@ -121,13 +165,12 @@ function MonacoEditor() {
             defaultLanguage='javascript'
             value={conteudoMonaco}
             onChange={(textoDigitado) => setConteudoMonaco(textoDigitado)}
-            onMount={handleEditorOldMout}
             onValidate={handleEditorValidation}
           />
         </div>
 
         <div id='console' className='console'>
-          {consoleMessages}
+        {consoleMessages}
       {/* Exibe mensagens de erro */}
       {errorMessages.length > 0 && (
         <div>

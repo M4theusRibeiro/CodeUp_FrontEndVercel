@@ -1,0 +1,38 @@
+input {
+    all: unset;
+    display: block;
+  }
+
+label{
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+    
+}
+
+input{
+    max-width: 240px;
+    max-height: 16px;
+    background-color: black;
+    border: none;
+    border: 1px solid;
+    border-image-source: linear-gradient(90deg, rgba(0,226,242,1) 0%, rgba(0,127,251,1) 100%);
+    border-image-slice: 1;
+    color: white; 
+    padding: 5px;
+}
+
+input:hover{
+    background-color: black;
+    border: none;
+    border: 1px solid;
+    border-color: rgba(0,127,251,1);
+    background-image:  none;/* Crie um degradê horizontal */
+    color: white; /* Defina a cor do texto */
+    padding: 5px;
+}
+
+input:focus{
+    border-color: rgba(0,127,251,1);
+}
+
